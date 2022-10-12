@@ -3,7 +3,7 @@
 #include <string>
 #include <set>
 #include <algorithm>
-
+#include <list>
 // ф-я для отображение контейнера
 
 template <typename T>
@@ -14,11 +14,6 @@ void printContainer(T rangeBegin, T rangeEnd) {
     std::cout<<std::endl;
 }
 
-//  задание 1
-//  Напишите функцию PrintVectorPart, принимающую вектор целых чисел numbers,
-//  выполняющую поиск первого отрицательного числа в нём и выводящую в стандартный вывод все числа,
-//	расположенные левее найденного, в обратном порядке.
-//  Если вектор не содержит отрицательных чисел, выведите все числа в обратном порядке.
 
 void PrintVectorPart(const std::vector<int>& numbers) {
     auto it = find_if(begin(numbers),end(numbers),[](const int& n){
@@ -30,11 +25,7 @@ void PrintVectorPart(const std::vector<int>& numbers) {
         }
 }
 
-// задание 2
-//    Напишите функцию PrintVectorPart, принимающую вектор целых чисел numbers,
-//    выполняющую поиск первого отрицательного числа в нём и выводящую в стандартный вывод все числа,
-//	  расположенные левее найденного, в обратном порядке.
-//    Если вектор не содержит отрицательных чисел, выведите все числа в обратном порядке.
+
 template <typename T>
 std::vector<T> FindGreaterElements(const std::set<T>& elements, const T& border) {
     auto it = find_if(begin(elements),end(elements),[border](const T& n){
@@ -66,8 +57,34 @@ std::vector<std::string> SplitIntoWords(const std::string& String) {
 
     }
     return words;
+}
+
+//задание 4
+template <typename T>
+void RemoveDuplicates(std::vector<T>& elements) {
+    std::sort(elements.begin(), elements.end());
+
+    auto it = std::unique(elements.begin(), elements.end());
+    elements.erase(it, elements.end());
+}
+
+//задание 5
+
+void Permutations(int n) {
+    std::vector<int> vecNumbers;
+    vecNumbers.reserve(n);
+    do{
+        vecNumbers.push_back(n);
+        --n;
+    } while(n > 0);
+
+    do
+    {
+        printContainer(std::begin(vecNumbers), std::end(vecNumbers));
+    } while (std::prev_permutation(std::begin(vecNumbers), std::end(vecNumbers)));
 
 }
+
 int main()
 {
 //проверка работоспособности заданий:
@@ -94,6 +111,29 @@ int main()
 
 //    std::vector<std::string> words = SplitIntoWords(s);
 //    printContainer(words.begin(),words.end());
+
+      //задание 4 (Напишите шаблонную функцию RemoveDuplicates, принимающую по ссылке вектор elements объектов типа T и удаляющую из него все дубликаты элементов. Порядок оставшихся элементов может быть любым.
+      //           Гарантируется, что объекты типа T можно сравнивать с помощью операторов ==, !=, < и >.)
+//    std::vector<int> v1 = { 6, 4, 7, 6, 4, 4, 0, 1 };
+//    RemoveDuplicates(v1);
+//    for (int x : v1) {
+//        std::cout << x << " ";
+//    }
+//    std::cout << std::endl;
+
+//    std::vector<std::string> v2 = { "C", "C++", "C++", "C", "C++" };
+//    RemoveDuplicates(v2);
+//    for (const std::string& s : v2) {
+//        std::cout << s << " ";
+//    }
+//    std::cout << std::endl;
+
+
+    //задание 5 (Дано целое положительное число N, не превышающее 9. Выведите все перестановки чисел от 1 до N в обратном лексикографическом порядке)
+
+//    Permutations(3);
+//    Permutations(4);
+
 
     return 0;
 }
