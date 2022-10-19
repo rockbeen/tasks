@@ -84,6 +84,18 @@ void Permutations(int n) {
     } while (std::prev_permutation(std::begin(vecNumbers), std::end(vecNumbers)));
 
 }
+//задание 6
+template <typename RandomIt>
+void MergeSort(RandomIt range_begin, RandomIt range_end) {
+    if (range_end - range_begin < 2) return;
+
+    std::vector<typename RandomIt::value_type> elements(range_begin, range_end);
+    auto middle = elements.begin() + (elements.end() - elements.begin()) / 2;
+    MergeSort(elements.begin(), middle);
+    MergeSort(middle, elements.end());
+    std::merge(elements.begin(), middle, middle, elements.end(), range_begin);
+}
+
 
 int main()
 {
@@ -134,6 +146,17 @@ int main()
 //    Permutations(3);
 //    Permutations(4);
 
+    // задание 6 (Напишите шаблонную функцию MergeSort, принимающую два итератора шаблонного типа RandomIt и сортирующую заданный ими диапазон с помощью сортировки слиянием. Гарантируется, что:
+    //итераторы типа RandomIt аналогичны по функциональности итераторам вектора и строки, то есть их можно сравнивать с помощью операторов <, <=, > и >=, а также вычитать и складывать с числами;
+    //сортируемые объекты можно сравнивать с помощью оператора <.
+
+    //В этой задаче гарантируется, что длина передаваемого диапазона является степенью двойки, так что вектор всегда можно разбить на две равные части.))
+//     std::vector<int> v = {6, 4, 7, 6, 4, 4, 0, 1};
+//     MergeSort(begin(v), end(v));
+//     for (int x : v) {
+//       std::cout << x << " ";
+//     }
+//     std::cout << std::endl;
 
     return 0;
 }
